@@ -79,3 +79,4 @@ variable "threat_detection_policy" {
 variable "mysql_server_name" {}
 variable "sku" {}
 variable "tags" { default = {} }
+variable "allow_ip" {}

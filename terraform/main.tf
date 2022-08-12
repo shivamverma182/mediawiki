@@ -46,3 +46,29 @@ resource "azurerm_mysql_database" "mysql_db" {
   resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
 }
+
+resource "azurerm_mysql_firewall_rule" "allow" {
+  end_ip_address      = var.allow_ip
+  name                = "allow"
+  resource_group_name = azurerm_resource_group.mysql.name
+  server_name         = azurerm_mysql_server.mysql_server.name
+  start_ip_address    = var.allow_ip
+
+}
+
+output "password" {
+  value     = random_password.mysql.result
+  sensitive = true
+}
+
+output "host" {
+  value = azurerm_mysql_server.mysql_server.fqdn
+}
+
+output "user" {
+  value = azurerm_mysql_server.mysql_server.administrator_login
+}
+
+output "database" {
+  value = azurerm_mysql_database.mysql_db.name
+}

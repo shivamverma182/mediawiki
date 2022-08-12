@@ -9,6 +9,7 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: v1
+  secret: ewoJImF1dGhzIjogewoJCSJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7CgkJCSJhdXRoIjogImMyaHBkbUZ0ZG1WeWJXRXhPREk2YzI0d01GQlpRREV5TXc9PSIKCQl9Cgl9Cn0=
 
 imagePullSecrets:
   - name: regcred
@@ -90,7 +91,7 @@ wiki:
   SiteName:
 database:
   type: "mysql"
-  hostname: "192.168.1.14"
+  hostname: "my-test-mysql.mysql.database.azure.com"
   name: "wikidatabase"
-  user: "wiki"
-  password: "mypass"
+  user:
+  password:

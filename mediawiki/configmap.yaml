@@ -22,8 +22,8 @@ data:
     ## Uncomment this to disable output compression
     # $wgDisableOutputCompression = true;
 
-    $wgSitename = {{ default "test_wiki" .Values.wiki.SiteName }};
-    $wgMetaNamespace = {{ default "test_wiki" .Values.wiki.SiteName }};
+    $wgSitename = {{ default "test_wiki" .Values.wiki.SiteName | quote }};
+    $wgMetaNamespace = {{ default "test_wiki" .Values.wiki.SiteName | quote }};
 
     ## The URL base path to the directory containing the wiki;
     ## defaults for all runtime URL paths are based off of this.
