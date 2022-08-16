@@ -2,15 +2,10 @@ resource "random_password" "mysql" {
   length = 12
 }
 
-resource "azurerm_resource_group" "mysql" {
-  location = var.location
-  name     = var.resource_group_name
-}
-
 resource "azurerm_mysql_server" "mysql_server" {
   name                             = var.mysql_server_name
-  location                         = azurerm_resource_group.mysql.location
-  resource_group_name              = azurerm_resource_group.mysql.name
+  location                         = var.location
+  resource_group_name              = var.resource_group_name
   sku_name                         = var.sku
   backup_retention_days            = var.backup_retention_days
   geo_redundant_backup_enabled     = var.geo_redundant_backup_enabled
@@ -42,14 +37,14 @@ resource "azurerm_mysql_database" "mysql_db" {
   charset             = lookup(each.value, "charset", "utf8")
   collation           = lookup(each.value, "collation", "utf8_general_ci")
   name                = each.key
-  resource_group_name = azurerm_resource_group.mysql.name
+  resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
 }
 
 resource "azurerm_mysql_firewall_rule" "firewall_rules" {
   for_each            = var.allowed_cidrs
   name                = each.key
-  resource_group_name = azurerm_resource_group.mysql.name
+  resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
   start_ip_address    = cidrhost(each.value, 0)
   end_ip_address      = cidrhost(each.value, -1)
@@ -58,7 +53,7 @@ resource "azurerm_mysql_firewall_rule" "firewall_rules" {
 resource "azurerm_mysql_virtual_network_rule" "vnet_rules" {
   for_each            = var.allowed_subnets
   name                = each.key
-  resource_group_name = azurerm_resource_group.mysql.name
+  resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
   subnet_id           = each.value
 }

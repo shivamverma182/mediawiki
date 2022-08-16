@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-job
+  labels:
+    {{- include "mediawiki.selectorLabels" . | nindent 8 }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-1"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: "{{ .Release.Name }}"
+      labels:
+        {{- include "mediawiki.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: schema
+        image: {{ .Values.schema.image }}  # shivamverma182/schema:v2
+        imagePullPolicy: Always
+        env:
+          - name: DB_USER
+            value: {{ .Values.database.user | quote }}
+          - name: DB_HOST
+            value: {{ .Values.database.hostname | quote }}
+          - name: DB_PASSWORD
+            value: {{ .Values.database.password | quote }}
+          - name: DB_NAME
+            value: {{ .Values.database.name | quote }}
+          - name: DB_SSL
+            value: {{ default true .Values.database.ssl | quote }}
+        volumeMounts:
+          - mountPath: /mnt/schema.sql
+            name: {{ .Release.Name }}-schema-cm
+            subPath: schema.sql
+            readOnly: true
+      volumes:
+        - name: {{ .Release.Name }}-schema-cm
+          configMap:
+            name: {{ .Release.Name }}-schema-cm

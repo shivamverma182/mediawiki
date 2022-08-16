@@ -33,8 +33,9 @@ data:
     $wgScriptPath = "/mediawiki";
 
     ## The protocol and server name to use in fully-qualified URLs
-    $wgServer = {{ .Values.ingress.Hostname | quote }};
-
+    {{- with (index .Values.ingress.hosts 0) }}
+    $wgServer = "http://{{ .host }}";
+    {{- end }}
     ## The URL path to static resources (images, scripts, etc.)
     $wgResourceBasePath = $wgScriptPath;
 
@@ -65,7 +66,7 @@ data:
     $wgDBname = {{ .Values.database.name | quote}};
     $wgDBuser = {{ .Values.database.user | quote}};
     $wgDBpassword = {{ .Values.database.password | quote}};
-
+    $wgDBssl = true;
     # MySQL specific settings
     $wgDBprefix = "";
 
@@ -86,6 +87,7 @@ data:
     $wgUseImageMagick = true;
     $wgImageMagickConvertCommand = "/usr/bin/convert";
 
+    # This is sample
     # InstantCommons allows wiki to use images from https://commons.wikimedia.org
     $wgUseInstantCommons = false;
 
@@ -105,14 +107,14 @@ data:
     ## be publicly accessible from the web.
     #$wgCacheDirectory = "$IP/cache";
 
-    $wgSecretKey = "7ac5cb5b254b647f4a8e3e703531c514c899f6efd93780971d03c79381aa07ae";
+    # $wgSecretKey = "7ac5cb5b254b647f4a8e3e703531c514c899f6efd93780971d03c79381aa07ae";
 
     # Changing this will log out all existing sessions.
-    $wgAuthenticationTokenVersion = "1";
+    # $wgAuthenticationTokenVersion = "1";
 
     # Site upgrade key. Must be set to a string (default provided) to turn on the
     # web installer while LocalSettings.php is in place
-    $wgUpgradeKey = "6152ed3263445803";
+    # $wgUpgradeKey = "6152ed3263445803";
 
     ## For attaching licensing metadata to pages, and displaying an
     ## appropriate copyright notice / icon. GNU Free Documentation
@@ -121,6 +123,9 @@ data:
     $wgRightsUrl = "";
     $wgRightsText = "";
     $wgRightsIcon = "";
+    $wgShowExceptionDetails = true;
+    $wgShowDBErrorBacktrace = true;
+    $wgShowSQLErrors = true;
 
     # Path to the GNU diff3 utility. Used for conflict resolution.
     $wgDiff3 = "/usr/bin/diff3";
@@ -142,4 +147,4 @@ data:
 
 kind: ConfigMap
 metadata:
-  name: localsettings
+  name: {{ .Release.Name }}-cm

@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/shivam/assignment'
+ 
+cd terraform; terraform apply -auto-approve -input=false
+make: Leaving directory '/home/shivam/assignment'
+ 

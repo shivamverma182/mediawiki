@@ -19,10 +19,10 @@
 -- Table structure for table `actor`
 --
 
-DROP TABLE IF EXISTS `actor`;
+-- DROP TABLE IF EXISTS `actor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `actor` (
+CREATE TABLE IF NOT EXISTS `actor` (
   `actor_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `actor_user` int(10) unsigned DEFAULT NULL,
   `actor_name` varbinary(255) NOT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `actor` (
 -- Table structure for table `archive`
 --
 
-DROP TABLE IF EXISTS `archive`;
+-- DROP TABLE IF EXISTS `archive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `archive` (
+CREATE TABLE IF NOT EXISTS `archive` (
   `ar_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ar_namespace` int(11) NOT NULL DEFAULT 0,
   `ar_title` varbinary(255) NOT NULL DEFAULT '',
@@ -64,10 +64,10 @@ CREATE TABLE `archive` (
 -- Table structure for table `bot_passwords`
 --
 
-DROP TABLE IF EXISTS `bot_passwords`;
+-- DROP TABLE IF EXISTS `bot_passwords`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bot_passwords` (
+CREATE TABLE IF NOT EXISTS `bot_passwords` (
   `bp_user` int(10) unsigned NOT NULL,
   `bp_app_id` varbinary(32) NOT NULL,
   `bp_password` tinyblob NOT NULL,
@@ -82,10 +82,10 @@ CREATE TABLE `bot_passwords` (
 -- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
+-- DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `cat_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cat_title` varbinary(255) NOT NULL,
   `cat_pages` int(11) NOT NULL DEFAULT 0,
@@ -101,10 +101,10 @@ CREATE TABLE `category` (
 -- Table structure for table `categorylinks`
 --
 
-DROP TABLE IF EXISTS `categorylinks`;
+-- DROP TABLE IF EXISTS `categorylinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `categorylinks` (
+CREATE TABLE IF NOT EXISTS `categorylinks` (
   `cl_from` int(10) unsigned NOT NULL DEFAULT 0,
   `cl_to` varbinary(255) NOT NULL DEFAULT '',
   `cl_sortkey` varbinary(230) NOT NULL DEFAULT '',
@@ -123,10 +123,10 @@ CREATE TABLE `categorylinks` (
 -- Table structure for table `change_tag`
 --
 
-DROP TABLE IF EXISTS `change_tag`;
+-- DROP TABLE IF EXISTS `change_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `change_tag` (
+CREATE TABLE IF NOT EXISTS `change_tag` (
   `ct_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ct_rc_id` int(10) unsigned DEFAULT NULL,
   `ct_log_id` int(10) unsigned DEFAULT NULL,
@@ -145,10 +145,10 @@ CREATE TABLE `change_tag` (
 -- Table structure for table `change_tag_def`
 --
 
-DROP TABLE IF EXISTS `change_tag_def`;
+-- DROP TABLE IF EXISTS `change_tag_def`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `change_tag_def` (
+CREATE TABLE IF NOT EXISTS `change_tag_def` (
   `ctd_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ctd_name` varbinary(255) NOT NULL,
   `ctd_user_defined` tinyint(1) NOT NULL,
@@ -164,10 +164,10 @@ CREATE TABLE `change_tag_def` (
 -- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `comment`;
+-- DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comment` (
+CREATE TABLE IF NOT EXISTS `comment` (
   `comment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `comment_hash` int(11) NOT NULL,
   `comment_text` blob NOT NULL,
@@ -181,10 +181,10 @@ CREATE TABLE `comment` (
 -- Table structure for table `content`
 --
 
-DROP TABLE IF EXISTS `content`;
+-- DROP TABLE IF EXISTS `content`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `content` (
+CREATE TABLE IF NOT EXISTS `content` (
   `content_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `content_size` int(10) unsigned NOT NULL,
   `content_sha1` varbinary(32) NOT NULL,
@@ -198,10 +198,10 @@ CREATE TABLE `content` (
 -- Table structure for table `content_models`
 --
 
-DROP TABLE IF EXISTS `content_models`;
+-- DROP TABLE IF EXISTS `content_models`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `content_models` (
+CREATE TABLE IF NOT EXISTS `content_models` (
   `model_id` int(11) NOT NULL AUTO_INCREMENT,
   `model_name` varbinary(64) NOT NULL,
   PRIMARY KEY (`model_id`),
@@ -213,10 +213,10 @@ CREATE TABLE `content_models` (
 -- Table structure for table `externallinks`
 --
 
-DROP TABLE IF EXISTS `externallinks`;
+-- DROP TABLE IF EXISTS `externallinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `externallinks` (
+CREATE TABLE IF NOT EXISTS `externallinks` (
   `el_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `el_from` int(10) unsigned NOT NULL DEFAULT 0,
   `el_to` blob NOT NULL,
@@ -235,10 +235,10 @@ CREATE TABLE `externallinks` (
 -- Table structure for table `filearchive`
 --
 
-DROP TABLE IF EXISTS `filearchive`;
+-- DROP TABLE IF EXISTS `filearchive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `filearchive` (
+CREATE TABLE IF NOT EXISTS `filearchive` (
   `fa_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fa_name` varbinary(255) NOT NULL DEFAULT '',
   `fa_archive_name` varbinary(255) DEFAULT '',
@@ -273,10 +273,10 @@ CREATE TABLE `filearchive` (
 -- Table structure for table `image`
 --
 
-DROP TABLE IF EXISTS `image`;
+-- DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `image` (
+CREATE TABLE IF NOT EXISTS `image` (
   `img_name` varbinary(255) NOT NULL DEFAULT '',
   `img_size` int(10) unsigned NOT NULL DEFAULT 0,
   `img_width` int(11) NOT NULL DEFAULT 0,
@@ -306,7 +306,7 @@ CREATE TABLE `image` (
 DROP TABLE IF EXISTS `imagelinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imagelinks` (
+CREATE TABLE IF NOT EXISTS `imagelinks` (
   `il_from` int(10) unsigned NOT NULL DEFAULT 0,
   `il_to` varbinary(255) NOT NULL DEFAULT '',
   `il_from_namespace` int(11) NOT NULL DEFAULT 0,
@@ -323,7 +323,7 @@ CREATE TABLE `imagelinks` (
 DROP TABLE IF EXISTS `interwiki`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `interwiki` (
+CREATE TABLE IF NOT EXISTS `interwiki` (
   `iw_prefix` varbinary(32) NOT NULL,
   `iw_url` blob NOT NULL,
   `iw_api` blob NOT NULL,
@@ -338,10 +338,10 @@ CREATE TABLE `interwiki` (
 -- Table structure for table `ip_changes`
 --
 
-DROP TABLE IF EXISTS `ip_changes`;
+-- DROP TABLE IF EXISTS `ip_changes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ip_changes` (
+CREATE TABLE IF NOT EXISTS `ip_changes` (
   `ipc_rev_id` int(10) unsigned NOT NULL DEFAULT 0,
   `ipc_rev_timestamp` binary(14) NOT NULL,
   `ipc_hex` varbinary(35) NOT NULL DEFAULT '',
@@ -355,10 +355,10 @@ CREATE TABLE `ip_changes` (
 -- Table structure for table `ipblocks`
 --
 
-DROP TABLE IF EXISTS `ipblocks`;
+-- DROP TABLE IF EXISTS `ipblocks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ipblocks` (
+CREATE TABLE IF NOT EXISTS `ipblocks` (
   `ipb_id` int(11) NOT NULL AUTO_INCREMENT,
   `ipb_address` tinyblob NOT NULL,
   `ipb_user` int(10) unsigned NOT NULL DEFAULT 0,
@@ -391,10 +391,10 @@ CREATE TABLE `ipblocks` (
 -- Table structure for table `ipblocks_restrictions`
 --
 
-DROP TABLE IF EXISTS `ipblocks_restrictions`;
+-- DROP TABLE IF EXISTS `ipblocks_restrictions`; 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ipblocks_restrictions` (
+CREATE TABLE IF NOT EXISTS `ipblocks_restrictions` (
   `ir_ipb_id` int(11) NOT NULL,
   `ir_type` tinyint(4) NOT NULL,
   `ir_value` int(10) unsigned NOT NULL,
@@ -407,10 +407,10 @@ CREATE TABLE `ipblocks_restrictions` (
 -- Table structure for table `iwlinks`
 --
 
-DROP TABLE IF EXISTS `iwlinks`;
+-- DROP TABLE IF EXISTS `iwlinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `iwlinks` (
+CREATE TABLE IF NOT EXISTS `iwlinks` (
   `iwl_from` int(10) unsigned NOT NULL DEFAULT 0,
   `iwl_prefix` varbinary(32) NOT NULL DEFAULT '',
   `iwl_title` varbinary(255) NOT NULL DEFAULT '',
@@ -424,10 +424,10 @@ CREATE TABLE `iwlinks` (
 -- Table structure for table `job`
 --
 
-DROP TABLE IF EXISTS `job`;
+-- DROP TABLE IF EXISTS `job`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `job` (
+CREATE TABLE IF NOT EXISTS `job` (
   `job_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `job_cmd` varbinary(60) NOT NULL DEFAULT '',
   `job_namespace` int(11) NOT NULL,
@@ -452,10 +452,10 @@ CREATE TABLE `job` (
 -- Table structure for table `l10n_cache`
 --
 
-DROP TABLE IF EXISTS `l10n_cache`;
+-- DROP TABLE IF EXISTS `l10n_cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `l10n_cache` (
+CREATE TABLE IF NOT EXISTS `l10n_cache` (
   `lc_lang` varbinary(35) NOT NULL,
   `lc_key` varbinary(255) NOT NULL,
   `lc_value` mediumblob NOT NULL,
@@ -467,10 +467,10 @@ CREATE TABLE `l10n_cache` (
 -- Table structure for table `langlinks`
 --
 
-DROP TABLE IF EXISTS `langlinks`;
+-- DROP TABLE IF EXISTS `langlinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `langlinks` (
+CREATE TABLE IF NOT EXISTS `langlinks` (
   `ll_from` int(10) unsigned NOT NULL DEFAULT 0,
   `ll_lang` varbinary(35) NOT NULL DEFAULT '',
   `ll_title` varbinary(255) NOT NULL DEFAULT '',
@@ -483,10 +483,10 @@ CREATE TABLE `langlinks` (
 -- Table structure for table `linktarget`
 --
 
-DROP TABLE IF EXISTS `linktarget`;
+-- DROP TABLE IF EXISTS `linktarget`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `linktarget` (
+CREATE TABLE IF NOT EXISTS `linktarget` (
   `lt_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `lt_namespace` int(11) NOT NULL,
   `lt_title` varbinary(255) NOT NULL,
@@ -499,10 +499,10 @@ CREATE TABLE `linktarget` (
 -- Table structure for table `log_search`
 --
 
-DROP TABLE IF EXISTS `log_search`;
+-- DROP TABLE IF EXISTS `log_search`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `log_search` (
+CREATE TABLE IF NOT EXISTS `log_search` (
   `ls_field` varbinary(32) NOT NULL,
   `ls_value` varbinary(255) NOT NULL,
   `ls_log_id` int(10) unsigned NOT NULL DEFAULT 0,
@@ -515,10 +515,10 @@ CREATE TABLE `log_search` (
 -- Table structure for table `logging`
 --
 
-DROP TABLE IF EXISTS `logging`;
+-- DROP TABLE IF EXISTS `logging`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `logging` (
+CREATE TABLE IF NOT EXISTS `logging` (
   `log_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `log_type` varbinary(32) NOT NULL DEFAULT '',
   `log_action` varbinary(32) NOT NULL DEFAULT '',
@@ -545,10 +545,10 @@ CREATE TABLE `logging` (
 -- Table structure for table `module_deps`
 --
 
-DROP TABLE IF EXISTS `module_deps`;
+-- DROP TABLE IF EXISTS `module_deps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `module_deps` (
+CREATE TABLE IF NOT EXISTS `module_deps` (
   `md_module` varbinary(255) NOT NULL,
   `md_skin` varbinary(32) NOT NULL,
   `md_deps` mediumblob NOT NULL,
@@ -560,10 +560,10 @@ CREATE TABLE `module_deps` (
 -- Table structure for table `objectcache`
 --
 
-DROP TABLE IF EXISTS `objectcache`;
+-- DROP TABLE IF EXISTS `objectcache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `objectcache` (
+CREATE TABLE IF NOT EXISTS `objectcache` (
   `keyname` varbinary(255) NOT NULL DEFAULT '',
   `value` mediumblob DEFAULT NULL,
   `exptime` binary(14) NOT NULL,
@@ -578,10 +578,10 @@ CREATE TABLE `objectcache` (
 -- Table structure for table `oldimage`
 --
 
-DROP TABLE IF EXISTS `oldimage`;
+-- DROP TABLE IF EXISTS `oldimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oldimage` (
+CREATE TABLE IF NOT EXISTS `oldimage` (
   `oi_name` varbinary(255) NOT NULL DEFAULT '',
   `oi_archive_name` varbinary(255) NOT NULL DEFAULT '',
   `oi_size` int(10) unsigned NOT NULL DEFAULT 0,
@@ -609,10 +609,10 @@ CREATE TABLE `oldimage` (
 -- Table structure for table `page`
 --
 
-DROP TABLE IF EXISTS `page`;
+-- DROP TABLE IF EXISTS `page`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `page` (
+CREATE TABLE IF NOT EXISTS `page` (
   `page_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page_namespace` int(11) NOT NULL,
   `page_title` varbinary(255) NOT NULL,
@@ -638,10 +638,10 @@ CREATE TABLE `page` (
 -- Table structure for table `page_props`
 --
 
-DROP TABLE IF EXISTS `page_props`;
+-- DROP TABLE IF EXISTS `page_props`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `page_props` (
+CREATE TABLE IF NOT EXISTS `page_props` (
   `pp_page` int(10) unsigned NOT NULL,
   `pp_propname` varbinary(60) NOT NULL,
   `pp_value` blob NOT NULL,
@@ -656,10 +656,10 @@ CREATE TABLE `page_props` (
 -- Table structure for table `page_restrictions`
 --
 
-DROP TABLE IF EXISTS `page_restrictions`;
+-- DROP TABLE IF EXISTS `page_restrictions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `page_restrictions` (
+CREATE TABLE IF NOT EXISTS `page_restrictions` (
   `pr_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pr_page` int(10) unsigned NOT NULL,
   `pr_type` varbinary(60) NOT NULL,
@@ -678,10 +678,10 @@ CREATE TABLE `page_restrictions` (
 -- Table structure for table `pagelinks`
 --
 
-DROP TABLE IF EXISTS `pagelinks`;
+-- DROP TABLE IF EXISTS `pagelinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pagelinks` (
+CREATE TABLE IF NOT EXISTS `pagelinks` (
   `pl_from` int(10) unsigned NOT NULL DEFAULT 0,
   `pl_namespace` int(11) NOT NULL DEFAULT 0,
   `pl_title` varbinary(255) NOT NULL DEFAULT '',
@@ -696,10 +696,10 @@ CREATE TABLE `pagelinks` (
 -- Table structure for table `protected_titles`
 --
 
-DROP TABLE IF EXISTS `protected_titles`;
+-- DROP TABLE IF EXISTS `protected_titles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `protected_titles` (
+CREATE TABLE IF NOT EXISTS `protected_titles` (
   `pt_namespace` int(11) NOT NULL,
   `pt_title` varbinary(255) NOT NULL,
   `pt_user` int(10) unsigned NOT NULL,
@@ -716,10 +716,10 @@ CREATE TABLE `protected_titles` (
 -- Table structure for table `querycache`
 --
 
-DROP TABLE IF EXISTS `querycache`;
+-- DROP TABLE IF EXISTS `querycache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `querycache` (
+CREATE TABLE IF NOT EXISTS `querycache` (
   `qc_type` varbinary(32) NOT NULL,
   `qc_value` int(10) unsigned NOT NULL DEFAULT 0,
   `qc_namespace` int(11) NOT NULL DEFAULT 0,
@@ -732,10 +732,10 @@ CREATE TABLE `querycache` (
 -- Table structure for table `querycache_info`
 --
 
-DROP TABLE IF EXISTS `querycache_info`;
+-- DROP TABLE IF EXISTS `querycache_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `querycache_info` (
+CREATE TABLE IF NOT EXISTS `querycache_info` (
   `qci_type` varbinary(32) NOT NULL DEFAULT '',
   `qci_timestamp` binary(14) NOT NULL DEFAULT '19700101000000',
   PRIMARY KEY (`qci_type`)
@@ -746,10 +746,10 @@ CREATE TABLE `querycache_info` (
 -- Table structure for table `querycachetwo`
 --
 
-DROP TABLE IF EXISTS `querycachetwo`;
+-- DROP TABLE IF EXISTS `querycachetwo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `querycachetwo` (
+CREATE TABLE IF NOT EXISTS `querycachetwo` (
   `qcc_type` varbinary(32) NOT NULL,
   `qcc_value` int(10) unsigned NOT NULL DEFAULT 0,
   `qcc_namespace` int(11) NOT NULL DEFAULT 0,
@@ -766,10 +766,10 @@ CREATE TABLE `querycachetwo` (
 -- Table structure for table `recentchanges`
 --
 
-DROP TABLE IF EXISTS `recentchanges`;
+-- DROP TABLE IF EXISTS `recentchanges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recentchanges` (
+CREATE TABLE IF NOT EXISTS `recentchanges` (
   `rc_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `rc_timestamp` binary(14) NOT NULL,
   `rc_actor` bigint(20) unsigned NOT NULL,
@@ -810,10 +810,10 @@ CREATE TABLE `recentchanges` (
 -- Table structure for table `redirect`
 --
 
-DROP TABLE IF EXISTS `redirect`;
+-- DROP TABLE IF EXISTS `redirect`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `redirect` (
+CREATE TABLE IF NOT EXISTS `redirect` (
   `rd_from` int(10) unsigned NOT NULL DEFAULT 0,
   `rd_namespace` int(11) NOT NULL DEFAULT 0,
   `rd_title` varbinary(255) NOT NULL DEFAULT '',
@@ -828,10 +828,10 @@ CREATE TABLE `redirect` (
 -- Table structure for table `revision`
 --
 
-DROP TABLE IF EXISTS `revision`;
+-- DROP TABLE IF EXISTS `revision`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `revision` (
+CREATE TABLE IF NOT EXISTS `revision` (
   `rev_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `rev_page` int(10) unsigned NOT NULL,
   `rev_comment_id` bigint(20) unsigned NOT NULL DEFAULT 0,
@@ -854,10 +854,10 @@ CREATE TABLE `revision` (
 -- Table structure for table `revision_actor_temp`
 --
 
-DROP TABLE IF EXISTS `revision_actor_temp`;
+-- DROP TABLE IF EXISTS `revision_actor_temp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `revision_actor_temp` (
+CREATE TABLE IF NOT EXISTS `revision_actor_temp` (
   `revactor_rev` int(10) unsigned NOT NULL,
   `revactor_actor` bigint(20) unsigned NOT NULL,
   `revactor_timestamp` binary(14) NOT NULL,
@@ -873,10 +873,10 @@ CREATE TABLE `revision_actor_temp` (
 -- Table structure for table `revision_comment_temp`
 --
 
-DROP TABLE IF EXISTS `revision_comment_temp`;
+-- DROP TABLE IF EXISTS `revision_comment_temp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `revision_comment_temp` (
+CREATE TABLE IF NOT EXISTS `revision_comment_temp` (
   `revcomment_rev` int(10) unsigned NOT NULL,
   `revcomment_comment_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`revcomment_rev`,`revcomment_comment_id`),
@@ -888,10 +888,10 @@ CREATE TABLE `revision_comment_temp` (
 -- Table structure for table `searchindex`
 --
 
-DROP TABLE IF EXISTS `searchindex`;
+-- DROP TABLE IF EXISTS `searchindex`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `searchindex` (
+CREATE TABLE IF NOT EXISTS `searchindex` (
   `si_page` int(10) unsigned NOT NULL,
   `si_title` varchar(255) NOT NULL DEFAULT '',
   `si_text` mediumtext NOT NULL,
@@ -905,10 +905,10 @@ CREATE TABLE `searchindex` (
 -- Table structure for table `site_identifiers`
 --
 
-DROP TABLE IF EXISTS `site_identifiers`;
+-- DROP TABLE IF EXISTS `site_identifiers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `site_identifiers` (
+CREATE TABLE IF NOT EXISTS `site_identifiers` (
   `si_type` varbinary(32) NOT NULL,
   `si_key` varbinary(32) NOT NULL,
   `si_site` int(10) unsigned NOT NULL,
@@ -922,10 +922,10 @@ CREATE TABLE `site_identifiers` (
 -- Table structure for table `site_stats`
 --
 
-DROP TABLE IF EXISTS `site_stats`;
+-- DROP TABLE IF EXISTS `site_stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `site_stats` (
+CREATE TABLE IF NOT EXISTS `site_stats` (
   `ss_row_id` int(10) unsigned NOT NULL,
   `ss_total_edits` bigint(20) unsigned DEFAULT NULL,
   `ss_good_articles` bigint(20) unsigned DEFAULT NULL,
@@ -941,10 +941,10 @@ CREATE TABLE `site_stats` (
 -- Table structure for table `sites`
 --
 
-DROP TABLE IF EXISTS `sites`;
+-- DROP TABLE IF EXISTS `sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sites` (
+CREATE TABLE IF NOT EXISTS `sites` (
   `site_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `site_global_key` varbinary(64) NOT NULL,
   `site_type` varbinary(32) NOT NULL,
@@ -972,10 +972,10 @@ CREATE TABLE `sites` (
 -- Table structure for table `slot_roles`
 --
 
-DROP TABLE IF EXISTS `slot_roles`;
+-- DROP TABLE IF EXISTS `slot_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `slot_roles` (
+CREATE TABLE IF NOT EXISTS `slot_roles` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varbinary(64) NOT NULL,
   PRIMARY KEY (`role_id`),
@@ -987,10 +987,10 @@ CREATE TABLE `slot_roles` (
 -- Table structure for table `slots`
 --
 
-DROP TABLE IF EXISTS `slots`;
+-- DROP TABLE IF EXISTS `slots`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `slots` (
+CREATE TABLE IF NOT EXISTS `slots` (
   `slot_revision_id` bigint(20) unsigned NOT NULL,
   `slot_role_id` smallint(5) unsigned NOT NULL,
   `slot_content_id` bigint(20) unsigned NOT NULL,
@@ -1004,10 +1004,10 @@ CREATE TABLE `slots` (
 -- Table structure for table `templatelinks`
 --
 
-DROP TABLE IF EXISTS `templatelinks`;
+-- DROP TABLE IF EXISTS `templatelinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `templatelinks` (
+CREATE TABLE IF NOT EXISTS `templatelinks` (
   `tl_from` int(10) unsigned NOT NULL DEFAULT 0,
   `tl_namespace` int(11) NOT NULL DEFAULT 0,
   `tl_title` varbinary(255) NOT NULL DEFAULT '',
@@ -1025,10 +1025,10 @@ CREATE TABLE `templatelinks` (
 -- Table structure for table `text`
 --
 
-DROP TABLE IF EXISTS `text`;
+-- DROP TABLE IF EXISTS `text`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `text` (
+CREATE TABLE IF NOT EXISTS `text` (
   `old_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `old_text` mediumblob NOT NULL,
   `old_flags` tinyblob NOT NULL,
@@ -1040,10 +1040,10 @@ CREATE TABLE `text` (
 -- Table structure for table `updatelog`
 --
 
-DROP TABLE IF EXISTS `updatelog`;
+-- DROP TABLE IF EXISTS `updatelog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `updatelog` (
+CREATE TABLE IF NOT EXISTS `updatelog` (
   `ul_key` varbinary(255) NOT NULL,
   `ul_value` blob DEFAULT NULL,
   PRIMARY KEY (`ul_key`)
@@ -1054,10 +1054,10 @@ CREATE TABLE `updatelog` (
 -- Table structure for table `uploadstash`
 --
 
-DROP TABLE IF EXISTS `uploadstash`;
+-- DROP TABLE IF EXISTS `uploadstash`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `uploadstash` (
+CREATE TABLE IF NOT EXISTS `uploadstash` (
   `us_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `us_user` int(10) unsigned NOT NULL,
   `us_key` varbinary(255) NOT NULL,
@@ -1086,10 +1086,10 @@ CREATE TABLE `uploadstash` (
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
+-- DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varbinary(255) NOT NULL DEFAULT '',
   `user_real_name` varbinary(255) NOT NULL DEFAULT '',
@@ -1116,10 +1116,10 @@ CREATE TABLE `user` (
 -- Table structure for table `user_former_groups`
 --
 
-DROP TABLE IF EXISTS `user_former_groups`;
+-- DROP TABLE IF EXISTS `user_former_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_former_groups` (
+CREATE TABLE IF NOT EXISTS `user_former_groups` (
   `ufg_user` int(10) unsigned NOT NULL DEFAULT 0,
   `ufg_group` varbinary(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`ufg_user`,`ufg_group`)
@@ -1130,10 +1130,10 @@ CREATE TABLE `user_former_groups` (
 -- Table structure for table `user_groups`
 --
 
-DROP TABLE IF EXISTS `user_groups`;
+-- DROP TABLE IF EXISTS `user_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_groups` (
+CREATE TABLE IF NOT EXISTS `user_groups` (
   `ug_user` int(10) unsigned NOT NULL DEFAULT 0,
   `ug_group` varbinary(255) NOT NULL DEFAULT '',
   `ug_expiry` varbinary(14) DEFAULT NULL,
@@ -1147,10 +1147,10 @@ CREATE TABLE `user_groups` (
 -- Table structure for table `user_newtalk`
 --
 
-DROP TABLE IF EXISTS `user_newtalk`;
+-- DROP TABLE IF EXISTS `user_newtalk`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_newtalk` (
+CREATE TABLE IF NOT EXISTS `user_newtalk` (
   `user_id` int(10) unsigned NOT NULL DEFAULT 0,
   `user_ip` varbinary(40) NOT NULL DEFAULT '',
   `user_last_timestamp` binary(14) DEFAULT NULL,
@@ -1163,10 +1163,10 @@ CREATE TABLE `user_newtalk` (
 -- Table structure for table `user_properties`
 --
 
-DROP TABLE IF EXISTS `user_properties`;
+-- DROP TABLE IF EXISTS `user_properties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_properties` (
+CREATE TABLE IF NOT EXISTS `user_properties` (
   `up_user` int(10) unsigned NOT NULL,
   `up_property` varbinary(255) NOT NULL,
   `up_value` blob DEFAULT NULL,
@@ -1179,10 +1179,10 @@ CREATE TABLE `user_properties` (
 -- Table structure for table `watchlist`
 --
 
-DROP TABLE IF EXISTS `watchlist`;
+-- DROP TABLE IF EXISTS `watchlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `watchlist` (
+CREATE TABLE IF NOT EXISTS `watchlist` (
   `wl_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `wl_user` int(10) unsigned NOT NULL,
   `wl_namespace` int(11) NOT NULL DEFAULT 0,
@@ -1199,10 +1199,10 @@ CREATE TABLE `watchlist` (
 -- Table structure for table `watchlist_expiry`
 --
 
-DROP TABLE IF EXISTS `watchlist_expiry`;
+-- DROP TABLE IF EXISTS `watchlist_expiry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `watchlist_expiry` (
+CREATE TABLE IF NOT EXISTS `watchlist_expiry` (
   `we_item` int(10) unsigned NOT NULL,
   `we_expiry` binary(14) NOT NULL,
   PRIMARY KEY (`we_item`),

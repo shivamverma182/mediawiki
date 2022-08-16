@@ -1,0 +1,10 @@
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  namespaceSelector: has(projectcalico.org/name) && projectcalico.org/name not in {"kube-system", "kube-node-lease", "kube-public"}
+  types:
+    - Ingress
+  ingress:
+    - action: deny

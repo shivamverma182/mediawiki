@@ -13,10 +13,8 @@ spec:
       {{- include "mediawiki.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
         {{- include "mediawiki.selectorLabels" . | nindent 8 }}
     spec:
@@ -39,15 +37,17 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
           volumeMounts:
             - mountPath: /opt/rh/httpd24/root/var/www/html/mediawiki/LocalSettings.php
-              name: localsettings
+              name: {{ .Release.Name }}-cm
               subPath: LocalSettings.php
               readOnly: true
       volumes:
-        - name: localsettings
+        - name: {{ .Release.Name }}-cm
           configMap:
-            name: localsettings
+            name: {{ .Release.Name }}-cm
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

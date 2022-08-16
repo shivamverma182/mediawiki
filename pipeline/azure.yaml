@@ -1,0 +1,103 @@
+trigger:
+  - main
+  - feature/*
+  - release/*
+
+pool:
+  name: test-agentpool
+
+variables:
+  - group: mediwiki-db
+
+stages:
+  - stage: plan
+    displayName: Terraform Plan
+    jobs:
+      - deployment:
+        displayName: Terraform Plan
+        environment: prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: sudo apt install unzip -y
+                - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+                  displayName: "Install terraform 1.2.3"
+                  inputs:
+                    terraformVersion: 1.2.3
+
+                - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+                  displayName: "Terraform Init"
+                  inputs:
+                    backendServiceArm: "my-spn"
+                    backendAzureRmResourceGroupName: "tf-ansible-poc-rg"
+                    backendAzureRmStorageAccountName: tfansiblepocstr
+                    backendAzureRmContainerName: tfstate
+                    backendAzureRmKey: mystate.tfstate
+
+                - task: TerraformTaskV3@3
+                  displayName: "Terraform Plan"
+                  inputs:
+                    provider: "azurerm"
+                    command: "plan"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform"
+                    commandOptions: "-input=false"
+                    environmentServiceNameAzureRM: "my-spn"
+  - stage: apply
+    displayName: Terraform Apply
+    jobs:
+      - deployment:
+        displayName: Terraform Apply
+        environment: prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: sudo apt install unzip -y
+                - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+                  displayName: "Install terraform 1.2.3"
+                  inputs:
+                    terraformVersion: 1.2.3
+
+                - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+                  displayName: "Terraform Init"
+                  inputs:
+                    backendServiceArm: "my-spn"
+                    backendAzureRmResourceGroupName: "tf-ansible-poc-rg"
+                    backendAzureRmStorageAccountName: tfansiblepocstr
+                    backendAzureRmContainerName: tfstate
+                    backendAzureRmKey: mystate.tfstate
+
+                - task: TerraformTaskV3@3
+                  inputs:
+                    provider: "azurerm"
+                    command: "apply"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform"
+                    commandOptions: "-input=false"
+                    environmentServiceNameAzureRM: "my-spn"
+
+  - stage: helm_deploy
+    displayName: Mediawiki Deployment
+    jobs:
+      - deployment:
+        displayName: Mediawiki Deployment
+        environment: prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: HelmInstaller@0
+                  displayName: "Install Helm"
+                  inputs:
+                    helmVersion: "3.9.0"
+                    installKubectl: true
+
+                - task: HelmDeploy@0
+                  displayName: "Deploy Mediawiki"
+                  inputs:
+                    command: install
+                    chartType: FilePath
+                    chartPath: $(System.DefaultWorkingDirectory)/mediawiki
+                    namespace: mediwiki
+                    releaseName: mediawiki
+                    arguments: --set database.type=mysql --set database.hostname=$(my-test-mysql-db-host) --set database.name=$(my-test-mysql-db-name) --set database.user=$(my-test-mysql-db-user) --set database.password=$(my-test-mysql-password) --create-namespace

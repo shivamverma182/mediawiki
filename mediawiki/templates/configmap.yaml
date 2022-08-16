@@ -33,8 +33,9 @@ data:
     $wgScriptPath = "/mediawiki";
 
     ## The protocol and server name to use in fully-qualified URLs
-    $wgServer = {{ .Values.ingress.Hostname | quote }};
-
+    {{- with (index .Values.ingress.hosts 0) }}
+    $wgServer = "http://{{ .host }}";
+    {{- end }}
     ## The URL path to static resources (images, scripts, etc.)
     $wgResourceBasePath = $wgScriptPath;
 
@@ -65,7 +66,7 @@ data:
     $wgDBname = {{ .Values.database.name | quote}};
     $wgDBuser = {{ .Values.database.user | quote}};
     $wgDBpassword = {{ .Values.database.password | quote}};
-
+    $wgDBssl = {{ .Values.database.ssl }};
     # MySQL specific settings
     $wgDBprefix = "";
 
@@ -86,6 +87,7 @@ data:
     $wgUseImageMagick = true;
     $wgImageMagickConvertCommand = "/usr/bin/convert";
 
+    # This is sample
     # InstantCommons allows wiki to use images from https://commons.wikimedia.org
     $wgUseInstantCommons = false;
 
@@ -145,4 +147,4 @@ data:
 
 kind: ConfigMap
 metadata:
-  name: localsettings
+  name: {{ .Release.Name }}-cm
