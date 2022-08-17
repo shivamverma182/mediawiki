@@ -2,6 +2,7 @@
 
 ## Build the image
 Navigate to the dockter image build and run following command
+    
     docker image build . -t repo:mediawiki:v1
 
 `NOTE: There is no package for http2 module for apache in redhat scl repo so are disabling the module.`
