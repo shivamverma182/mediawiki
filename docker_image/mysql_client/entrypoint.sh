@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eo pipefail
 set -x
-shopt -s nullglob
+
 echo "ssl: $DB_SSL"
 if [ $DB_SSL = fasle ]
 then

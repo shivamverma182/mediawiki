@@ -98,4 +98,4 @@ database:
   password:
   ssl: true
 schema:
-  image: shivamverma182/schema:v2
+  image: shivamverma182/schema:v3
